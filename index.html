@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>트럼프 어카운트 | Grace of Wealth</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --kale: #1C3A1E;
+    --kale-mid: #2D5230;
+    --cream: #F5F0E6;
+    --cream-dark: #EDE6D6;
+    --warm-white: #FAFAF7;
+    --text-dark: #1A1A18;
+    --text-mid: #4A5540;
+    --accent: #C8A96E;
+    --lime-bright: #B5D97A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Pretendard', -apple-system, sans-serif; background: var(--warm-white); color: var(--text-dark); overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(250,250,247,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(28,58,30,0.08); }
+  .logo { font-family: 'Pretendard', sans-serif; font-size: 18px; font-weight: 600; color: var(--kale); }
+  .logo span { color: var(--accent); }
+  nav a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  nav a:hover { color: var(--kale); }
+  .nav-cta { background: var(--kale) !important; color: var(--cream) !important; padding: 10px 22px; border-radius: 100px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+
+  .hero { min-height: 100vh; background: var(--kale); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -200px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(181,217,122,0.12) 0%, transparent 70%); pointer-events: none; }
+  .hero-left { padding: 160px 64px 80px; display: flex; flex-direction: column; justify-content: center; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(181,217,122,0.15); border: 1px solid rgba(181,217,122,0.3); padding: 8px 16px; border-radius: 100px; margin-bottom: 32px; width: fit-content; }
+  .hero-badge span { font-size: 12px; font-weight: 600; color: var(--lime-bright); letter-spacing: 0.08em; }
+  .dot { width: 6px; height: 6px; background: var(--lime-bright); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)} }
+  .hero h1 { font-family: 'Pretendard', sans-serif; font-size: clamp(36px,4vw,52px); font-weight: 700; color: var(--cream); line-height: 1.15; margin-bottom: 24px; }
+  .hero h1 em { font-style: italic; color: var(--lime-bright); }
+  .hero > .hero-left > p { font-size: 17px; line-height: 1.75; color: rgba(245,240,230,0.7); max-width: 420px; margin-bottom: 48px; font-weight: 400; }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { background: var(--lime-bright); color: var(--kale); padding: 16px 32px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .btn-primary:hover { background: #C8E88A; transform: translateY(-1px); }
+  .btn-secondary { border: 1px solid rgba(245,240,230,0.3); color: var(--cream); padding: 16px 32px; border-radius: 100px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: rgba(245,240,230,0.6); }
+  .hero-right { display: flex; align-items: center; justify-content: center; padding: 160px 64px 80px 0; }
+  .hero-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 40px; width: 100%; max-width: 380px; }
+  .hero-card-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: rgba(181,217,122,0.7); margin-bottom: 20px; text-transform: uppercase; }
+  .hero-stat .number { font-family: 'Pretendard', sans-serif; font-size: 52px; font-weight: 700; color: var(--cream); line-height: 1; margin-bottom: 6px; }
+  .hero-stat .label { font-size: 14px; color: rgba(245,240,230,0.6); font-weight: 400; }
+  .hero-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 24px 0; }
+  .hero-features { display: flex; flex-direction: column; gap: 16px; }
+  .hero-feature { display: flex; align-items: flex-start; gap: 12px; }
+  .h-icon { width: 32px; height: 32px; background: rgba(181,217,122,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .h-text { font-size: 14px; color: rgba(245,240,230,0.75); line-height: 1.5; font-weight: 400; }
+
+  section { padding: 100px 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--kale-mid); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--kale-mid); }
+  .section-title { font-family: 'Pretendard', sans-serif; font-size: clamp(28px,3vw,40px); font-weight: 700; color: var(--kale); line-height: 1.2; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; color: var(--text-mid); line-height: 1.75; max-width: 560px; font-weight: 400; }
+
+  .what-section { background: var(--cream); }
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px; }
+  .what-highlight { background: var(--kale); border-radius: 20px; padding: 40px; margin-top: 32px; }
+  .what-highlight .hl-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime-bright); margin-bottom: 12px; font-weight: 600; }
+  .what-highlight .hl-text { font-family: 'Pretendard', sans-serif; font-size: 21px; line-height: 1.5; color: var(--cream); }
+  .timeline { margin-top: 32px; }
+  .timeline-item { display: flex; gap: 16px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid rgba(28,58,30,0.1); }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-num { width: 36px; height: 36px; background: var(--kale); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--lime-bright); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+  .timeline-title { font-weight: 700; color: var(--kale); margin-bottom: 4px; font-size: 15px; }
+  .timeline-desc { font-size: 14px; color: var(--text-mid); line-height: 1.6; font-weight: 400; }
+  .what-cards { display: flex; flex-direction: column; gap: 20px; }
+  .what-card { background: var(--warm-white); border: 1px solid rgba(28,58,30,0.1); border-radius: 16px; padding: 28px; transition: all 0.2s; }
+  .what-card:hover { border-color: var(--kale-mid); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(28,58,30,0.08); }
+  .card-icon { font-size: 24px; margin-bottom: 12px; }
+  .what-card h3 { font-size: 15px; font-weight: 700; color: var(--kale); margin-bottom: 8px; }
+  .what-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; font-weight: 400; }
+
+  .open-section { background: var(--warm-white); }
+  .form-banner { background: var(--kale); border-radius: 20px; padding: 36px 40px; margin-top: 48px; margin-bottom: 56px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .banner-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime-bright); margin-bottom: 8px; }
+  .form-banner h3 { font-family: 'Pretendard', sans-serif; font-size: 24px; color: var(--cream); margin-bottom: 8px; }
+  .form-banner p { font-size: 14px; color: rgba(245,240,230,0.65); line-height: 1.6; font-weight: 400; max-width: 480px; }
+  .btn-form { background: var(--lime-bright); color: var(--kale); padding: 16px 32px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; }
+  .btn-form:hover { background: #C8E88A; transform: translateY(-1px); }
+  .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .step-tag { display: inline-block; background: rgba(45,82,48,0.12); color: var(--kale-mid); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px; margin-bottom: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .step-num { font-family: 'Pretendard', sans-serif; font-size: 64px; font-weight: 700; color: rgba(28,58,30,0.07); line-height: 1; margin-bottom: 16px; }
+  .step-card h3 { font-size: 17px; font-weight: 700; color: var(--kale); margin-bottom: 12px; }
+  .step-card p { font-size: 14px; color: var(--text-mid); line-height: 1.7; font-weight: 400; }
+  .form-link { color: var(--kale-mid); font-weight: 600; }
+  .alert-box { background: #FFF8EE; border: 1px solid rgba(200,169,110,0.3); border-left: 3px solid var(--accent); border-radius: 12px; padding: 24px 28px; margin-top: 48px; display: flex; gap: 16px; align-items: flex-start; }
+  .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .alert-box h4 { font-size: 15px; font-weight: 700; color: #7A5A20; margin-bottom: 6px; }
+  .alert-box p { font-size: 14px; color: #8A7040; line-height: 1.65; font-weight: 400; }
+
+  .faq-section { background: var(--cream); }
+  .faq-grid { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .faq-item { background: var(--warm-white); border-radius: 16px; padding: 32px; border: 1px solid rgba(28,58,30,0.08); transition: all 0.2s; }
+  .faq-item:hover { box-shadow: 0 4px 24px rgba(28,58,30,0.06); transform: translateY(-2px); }
+  .faq-q { font-size: 16px; font-weight: 700; color: var(--kale); margin-bottom: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .q-mark { background: var(--kale); color: var(--cream); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .faq-item p { font-size: 14px; color: var(--text-mid); line-height: 1.75; font-weight: 400; }
+  .hl { color: var(--kale); font-weight: 700; }
+  .faq-wide { grid-column: 1 / -1; }
+
+  .compare-section { background: var(--kale); padding: 100px 0; }
+  .compare-section .section-label { color: rgba(181,217,122,0.7); }
+  .compare-section .section-label::before { background: rgba(181,217,122,0.7); }
+  .compare-section .section-title { color: var(--cream); }
+  .compare-section .section-sub { color: rgba(245,240,230,0.6); }
+  .compare-table { margin-top: 60px; width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden; border-radius: 16px; }
+  .compare-table th { padding: 18px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-align: left; background: rgba(255,255,255,0.06); color: rgba(245,240,230,0.5); }
+  .compare-table th:first-child { color: var(--cream); }
+  .compare-table th.hc { background: rgba(181,217,122,0.15); color: var(--lime-bright); }
+  .compare-table td { padding: 16px; font-size: 13px; color: rgba(245,240,230,0.7); border-top: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); font-weight: 400; }
+  .compare-table td:first-child { color: var(--cream); font-weight: 600; }
+  .compare-table td.hc { background: rgba(181,217,122,0.08); color: var(--lime-bright); font-weight: 600; }
+  .ck { color: var(--lime-bright); font-weight: 700; }
+  .cx { color: rgba(245,240,230,0.25); }
+  .cn { color: rgba(245,240,230,0.55); }
+  .tip-box { margin-top: 32px; background: rgba(255,255,255,0.05); border: 1px solid rgba(181,217,122,0.2); border-radius: 14px; padding: 24px 28px; }
+  .tip-box p { font-size: 14px; color: rgba(245,240,230,0.65); line-height: 1.75; font-weight: 400; }
+
+  .cta-section { background: var(--cream-dark); text-align: center; padding: 120px 48px; }
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::before { display: none; }
+  .cta-section .section-title { text-align: center; max-width: 600px; margin: 0 auto 20px; }
+  .cta-section .section-sub { text-align: center; max-width: 500px; margin: 0 auto 48px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-dark { background: var(--kale); color: var(--cream); padding: 18px 40px; border-radius: 100px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+  .btn-dark:hover { background: var(--kale-mid); transform: translateY(-1px); }
+  .btn-outline-dark { border: 1.5px solid var(--kale); color: var(--kale); padding: 18px 40px; border-radius: 100px; font-size: 15px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .btn-outline-dark:hover { background: var(--kale); color: var(--cream); }
+
+  footer { background: var(--text-dark); padding: 48px 0; }
+  footer .logo { color: var(--cream); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 120px 24px 48px; }
+    .hero-right { display: none; }
+    .what-grid, .faq-grid { grid-template-columns: 1fr; gap: 32px; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 24px; }
+    section { padding: 72px 0; }
+    .faq-wide { grid-column: 1; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+    .form-banner { flex-direction: column; }
+    .compare-table th, .compare-table td { padding: 10px 8px; font-size: 11px; }
+  }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-badge{animation-delay:.1s}.hero h1{animation-delay:.2s}.hero-left>p{animation-delay:.3s}.hero-buttons{animation-delay:.4s}.hero-right{animation:fadeUp .6s ease .5s both}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Grace <span>of Wealth</span></div>
+  <div class="nav-links">
+    <a href="#what">트럼프 어카운트란</a>
+    <a href="#how">개설 방법</a>
+    <a href="#faq">자주 묻는 질문</a>
+    <a href="#compare">계좌 비교</a>
+    <a href="https://stan.store/graceofwdealth/p/gw-----q6n7a8ig" target="_blank" class="nav-cta">우리아이 비과세 계좌 상담예약</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><div class="dot"></div><span>2026년 7월 4일 공식 출시</span></div>
+    <h1>우리 아이의<br>첫 번째<br><em>투자 계좌</em></h1>
+    <p>트럼프 어카운트는 아이가 태어난 날부터 시작할 수 있는 세금 이연 투자 계좌입니다. 지금 Form 4547을 제출하면 2026년 7월 4일에 미국 재무부 $1,000 지원금을 받을 수 있어요.</p>
+    <div class="hero-buttons">
+      <a href="#how" class="btn-primary">개설 방법 알아보기</a>
+      <a href="https://stan.store/graceofwdealth/p/gw-----q6n7a8ig" target="_blank" class="btn-secondary">우리아이 비과세 계좌 상담예약</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-label">Trump Account 핵심 혜택</div>
+      <div class="hero-stat">
+        <div class="number">$1,000</div>
+        <div class="label">미국 재무부 파일럿 지원금 (2025~2028년 출생아)</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-features">
+        <div class="hero-feature"><div class="h-icon">💰</div><div class="h-text">연간 최대 <strong style="color:#B5D97A">$5,000</strong> 납입 가능 (가족·친구·고용주 모두)</div></div>
+        <div class="hero-feature"><div class="h-icon">📈</div><div class="h-text">18세까지 세금 이연 복리 성장</div></div>
+        <div class="hero-feature"><div class="h-icon">🎓</div><div class="h-text">18세 이후 학비·첫 주택 구입 시 패널티 없이 인출</div></div>
+        <div class="hero-feature"><div class="h-icon">🔒</div><div class="h-text">아이 소득 없어도 납입 가능, 개설 비용 없음</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="what-section" id="what">
+  <div class="container">
+    <div class="section-label">트럼프 어카운트란</div>
+    <h2 class="section-title">모든 아이를 위한<br>새로운 종류의 계좌</h2>
+    <p class="section-sub">트럼프 어카운트는 18세 이전 특별 규칙이 적용되는 새로운 형태의 Traditional IRA입니다. 장기 자산 형성을 위해 설계되었습니다.</p>
+    <div class="what-grid">
+      <div>
+        <div class="what-highlight">
+          <div class="hl-label">Grace of Wealth 관점</div>
+          <div class="hl-text">"아이가 태어난 날부터 18년간 복리로 키운 자산, 어떻게 쓸지는 아이가 결정합니다."</div>
+        </div>
+        <div class="timeline">
+          <div class="section-label" style="margin-top:32px;margin-bottom:8px;">계좌 소유 구조</div>
+          <div class="timeline-item"><div class="timeline-num">1</div><div><div class="timeline-title">출생 시</div><div class="timeline-desc">부모/보호자가 계좌를 개설하고 관리 시작</div></div></div>
+          <div class="timeline-item"><div class="timeline-num">2</div><div><div class="timeline-title">만 1~17세</div><div class="timeline-desc">성인이 계좌 관리, 자금은 투자 상태로 복리 성장</div></div></div>
+          <div class="timeline-item"><div class="timeline-num">3</div><div><div class="timeline-title">만 18세</div><div class="timeline-desc">아이가 법적 소유권 인수 → Traditional IRA로 전환</div></div></div>
+        </div>
+      </div>
+      <div class="what-cards">
+        <div class="what-card"><div class="card-icon">💵</div><h3>연간 최대 $5,000 납입</h3><p>가족, 친구, 고용주 모두 납입 가능. 아이의 소득이 없어도 됩니다. 만 17세가 되는 해의 12월 31일까지 납입 가능합니다.</p></div>
+        <div class="what-card"><div class="card-icon">🎁</div><h3>미국 재무부 $1,000 지원</h3><p>2025년 1월 1일 ~ 2028년 12월 31일 출생 아동 대상. 파일럿 프로그램으로 7월 4일부터 자동 입금됩니다.</p></div>
+        <div class="what-card"><div class="card-icon">📊</div><h3>세금 이연 복리 성장</h3><p>18세 이전에는 투자 수익에 세금 없이 계속 복리 재투자. UTMA/UGMA와 달리 매년 세금 걱정이 없습니다.</p></div>
+        <div class="what-card"><div class="card-icon">🏛️</div><h3>미국 주식 지수 펀드 투자</h3><p>미국 광범위 주식 지수 추종 저비용 펀드로만 투자 가능. 장기 안정 성장에 최적화된 구조입니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="open-section" id="how">
+  <div class="container">
+    <div class="section-label">개설 방법</div>
+    <h2 class="section-title">지금 바로 시작하세요</h2>
+    <p class="section-sub">2026년 7월 4일 공식 출시. 지금 IRS Form 4547을 제출하면 7월 4일에 $1,000 지원금을 받을 수 있습니다. <strong>단, $1,000 지원금은 2025년 1월 1일 ~ 2028년 12월 31일 출생 아동만 해당됩니다.</strong></p>
+
+    <div class="form-banner">
+      <div>
+        <div class="banner-eyebrow">아직 신청 안 하셨다고요?</div>
+        <h3>IRS Form 4547, 지금 바로 제출하세요</h3>
+        <p>제출 비용 없음. 온라인으로 5분이면 완료됩니다. 지금 제출해야 7월 4일에 $1,000 지원금을 받을 수 있어요. 아이의 생년월일, 연락처, 소셜 시큐리티 넘버가 필요합니다.</p>
+      </div>
+      <a href="https://trumpaccounts.gov/form" target="_blank" class="btn-form">→ Form 4547 제출하기</a>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-tag">Step 1</div>
+        <div class="step-num">01</div>
+        <h3>IRS Form 4547 제출</h3>
+        <p><a href="https://trumpaccounts.gov/form" target="_blank" class="form-link">trumpaccounts.gov/form</a>에서 온라인으로 제출하거나, IRS.gov/Form4547에서 PDF를 다운로드하여 세금 신고서와 함께 제출할 수 있습니다. 계좌 개설 비용은 없습니다.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-tag">Step 2</div>
+        <div class="step-num">02</div>
+        <h3>이메일 확인 후 계좌 활성화</h3>
+        <p><strong>no-reply@TrumpAccounts.Treasury.gov</strong>에서 오는 이메일을 확인합니다. 공식 앱(App Store / Google Play) 또는 TrumpAccounts.gov에서 계좌를 활성화합니다.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-tag">Step 3</div>
+        <div class="step-num">03</div>
+        <h3>7월 4일부터 납입 + $1,000 수령</h3>
+        <p>2026년 7월 4일부터 부모, 가족, 고용주 등의 납입이 가능합니다. 적격 아동은 미국 재무부 $1,000 파일럿 지원금을 계좌로 직접 받게 됩니다.</p>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <div class="alert-icon">⚠️</div>
+      <div>
+        <h4>⚠️ Scam에 주의하세요</h4>
+        <p>공식 연락은 이메일(<strong>no-reply@TrumpAccounts.Treasury.gov</strong>)로만 옵니다. 문자·전화는 100% 사기입니다. 고객 지원은 앱/웹 내 콜백 요청으로만 가능. 인터넷 검색 전화번호는 절대 사용하지 마세요. 의심스러우면 항상 <strong>TrumpAccounts.gov</strong>에서 직접 확인하세요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-label">자주 묻는 질문</div>
+    <h2 class="section-title">궁금한 점을 해결해 드립니다</h2>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q"><div class="q-mark">Q</div>얼마나 납입할 수 있나요?</div><p>가족, 친구, 고용주 합산 <span class="hl">연간 최대 $5,000</span>까지 납입 가능합니다. 아이가 만 17세가 되는 해의 12월 31일까지 납입할 수 있으며, 아이의 소득이 없어도 됩니다.</p></div>
+      <div class="faq-item"><div class="faq-q"><div class="q-mark">Q</div>18세 전에 인출할 수 있나요?</div><p>원칙적으로 <span class="hl">18세 이전에는 인출이 불가</span>합니다. 자금은 투자 상태로 유지되며 복리로 성장합니다.</p></div>
+      <div class="faq-item"><div class="faq-q"><div class="q-mark">Q</div>18세 이후 세금은 어떻게 되나요?</div><p>부모/가족이 납입한 <span class="hl">원금(Basis)은 비과세</span>로 인출 가능합니다. 수익분은 일반 소득세 적용. 학비·첫 주택 구입 등 적격 지출은 추가 패널티 없음. 그 외 59.5세 전 인출 시 <span class="hl">10% 조기 인출세 추가</span> 부과됩니다.</p></div>
+      <div class="faq-item"><div class="faq-q"><div class="q-mark">Q</div>어떤 아이가 $1,000을 받을 수 있나요?</div><p><span class="hl">2025년 1월 1일 ~ 2028년 12월 31일</span> 사이에 태어난 미국 시민권 아동이 대상입니다. 유효한 소셜 시큐리티 넘버가 있어야 하며, 계좌가 개설되어 있어야 7월 4일부터 자동 입금됩니다.</p></div>
+      <div class="faq-item"><div class="faq-q"><div class="q-mark">Q</div>한국에 있는 시민권자 아이도 받을 수 있나요?</div><p>네, <span class="hl">거주지와 관계없이 미국 시민권자</span>라면 트럼프 어카운트 개설이 가능합니다. 한국에 거주 중인 시민권 아동도 조건(출생연도, 소셜 시큐리티 넘버 보유)을 충족하면 $1,000 파일럿 지원금 신청이 가능합니다. 단, 부모 또는 법적 보호자가 authorized individual로서 Form 4547을 제출해야 합니다.</p></div>
+      <div class="faq-item faq-wide"><div class="faq-q"><div class="q-mark">Q</div>18세 이후 어떻게 되나요?</div><p>계좌는 <span class="hl">일반 Traditional IRA로 전환</span>됩니다. 아이가 직접 소유권을 인수하며, ① 학비·첫 주택 구입 등 적격 지출로 인출, ② 은퇴 자금으로 계속 성장, ③ Traditional IRA 한도 내 계속 납입 — 세 가지 선택지 중 원하는 방향으로 활용할 수 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="compare-section" id="compare">
+  <div class="container">
+    <div class="section-label">계좌 비교</div>
+    <h2 class="section-title">다른 계좌와 무엇이 다른가요?</h2>
+    <p class="section-sub">트럼프 어카운트는 기존 미성년자 계좌들과 여러 면에서 차별화됩니다. 아이의 상황에 따라 가장 적합한 조합을 함께 설계해 드립니다.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th class="hc">Trump Account</th>
+          <th>Roth IRA for Kids</th>
+          <th>저축성 생명보험</th>
+          <th>UTMA/UGMA</th>
+          <th>529</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>정부 $1,000 지원</td>
+          <td class="hc ck">✓ 있음</td>
+          <td class="cx">✗</td>
+          <td class="cx">✗</td>
+          <td class="cx">✗</td>
+          <td class="cx">✗</td>
+        </tr>
+        <tr>
+          <td>세금 혜택</td>
+          <td class="hc">세금 이연</td>
+          <td>완전 비과세 성장</td>
+          <td>세금 이연 + 캐시밸류</td>
+          <td class="cx">매년 과세</td>
+          <td>교육비 비과세</td>
+        </tr>
+        <tr>
+          <td>아이 소득 요건</td>
+          <td class="hc ck">✓ 불필요</td>
+          <td class="cx">✗ 소득 필요</td>
+          <td class="ck">✓ 불필요</td>
+          <td class="ck">✓ 불필요</td>
+          <td class="ck">✓ 불필요</td>
+        </tr>
+        <tr>
+          <td>18세 전 인출</td>
+          <td class="hc cx">✗ 불가</td>
+          <td class="cn">원금만 가능</td>
+          <td class="ck">✓ CSV 활용</td>
+          <td class="ck">✓ 가능</td>
+          <td class="cn">교육비만</td>
+        </tr>
+        <tr>
+          <td>사망 보장</td>
+          <td class="hc cx">✗</td>
+          <td class="cx">✗</td>
+          <td class="ck">✓ 있음</td>
+          <td class="cx">✗</td>
+          <td class="cx">✗</td>
+        </tr>
+        <tr>
+          <td>투자 유연성</td>
+          <td class="hc">지수 펀드 한정</td>
+          <td>자유</td>
+          <td>자유</td>
+          <td>자유</td>
+          <td>자유</td>
+        </tr>
+        <tr>
+          <td>연간 납입 한도</td>
+          <td class="hc">$5,000</td>
+          <td>$7,000</td>
+          <td>제한 없음</td>
+          <td>제한 없음</td>
+          <td>제한 없음</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tip-box">
+      <p>💡 <strong style="color:var(--lime-bright);">Grace of Wealth 관점:</strong> 아이들의 저축투자계좌는 '비과세'와 '복리'가 핵심입니다. 아이 나이와 가정의 재정 상황에 따라 가장 최적의 조합이 어떤 것인지 상담을 통해 설계해 드립니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="consult">
+  <div class="section-label">Grace of Wealth 상담</div>
+  <h2 class="section-title">우리 아이 나이와 상황에 맞는<br>전략을 함께 만들어요</h2>
+  <p class="section-sub">트럼프 어카운트 개설부터, Roth IRA · 저축성 생명보험과의 조합 전략까지. 아이의 나이와 가정 재정 상황에 맞게 설계해 드립니다.</p>
+  <div class="cta-buttons">
+    <a href="https://stan.store/graceofwdealth/p/gw-----q6n7a8ig" target="_blank" class="btn-dark">📅 우리아이 비과세 계좌 상담예약</a>
+    <a href="https://trumpaccounts.gov/form" target="_blank" class="btn-outline-dark">→ Form 4547 제출하기</a>
+  </div>
+</section>
+
+<footer>
+  <div style="max-width:1100px;margin:0 auto;padding:0 48px;width:100%;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div class="logo">Grace <span>of Wealth</span></div>
+      <div style="display:flex;gap:24px;">
+        <a href="https://trumpaccounts.gov" target="_blank" style="font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;">TrumpAccounts.gov</a>
+        <a href="https://www.irs.gov/trumpaccounts" target="_blank" style="font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;">IRS.gov</a>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:28px 32px;margin-bottom:24px;">
+      <p style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">DISCLAIMER</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.35);line-height:1.8;font-weight:400;">
+        본 페이지는 미국 재무부(U.S. Department of the Treasury) 및 IRS 공식 자료를 바탕으로 정보 제공 목적으로 작성되었습니다. 본 내용은 법적·세무적·재정적 조언(legal, tax, or financial advice)이 아니며, 개인의 구체적인 상황에 따라 결과가 다를 수 있습니다.
+        <br><br>
+        트럼프 어카운트(Trump Account)의 규정, 자격 요건, 세금 처리 방식 등은 향후 법령 개정에 따라 변경될 수 있습니다. 최신 공식 정보는 반드시 <strong style="color:rgba(255,255,255,0.55);">TrumpAccounts.gov</strong> 및 <strong style="color:rgba(255,255,255,0.55);">IRS.gov/Form4547</strong>에서 직접 확인하시기 바랍니다.
+        <br><br>
+        본 페이지에 포함된 계좌 비교 정보(Roth IRA for Kids, 저축성 생명보험, UTMA/UGMA, 529 등)는 일반적인 교육 목적의 비교이며, 특정 상품에 대한 추천이나 권유가 아닙니다. 개인의 세금, 투자, 보험 관련 결정은 반드시 공인 재무설계사(CFP), 세무사(CPA), 또는 보험 전문가와 상담 후 진행하시기 바랍니다.
+        <br><br>
+        Grace of Wealth는 보험 및 금융 서비스 전문가로서 관련 라이선스를 보유하고 있으며, 상담은 개인의 상황에 맞게 별도로 진행됩니다. 본 사이트를 통해 제공되는 정보는 특정 투자 결과를 보장하지 않습니다.
+      </p>
+    </div>
+    <p style="font-size:12px;color:rgba(255,255,255,0.2);text-align:center;font-weight:400;">© 2026 Grace of Wealth. All rights reserved. | 본 콘텐츠의 무단 복제 및 배포를 금합니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>
